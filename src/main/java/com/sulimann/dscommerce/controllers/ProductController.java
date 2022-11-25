@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,5 +39,11 @@ public class ProductController {
     public ResponseEntity<ProductDTO> insert (@RequestBody ProductDTO productDTO){
         ProductDTO dto = productService.insert(productDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDTO> findById(@PathVariable Long id, @RequestBody ProductDTO productDTO){
+        ProductDTO dto = productService.update(id, productDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 }
