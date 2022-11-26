@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sulimann.dscommerce.dto.ProductDTO;
 import com.sulimann.dscommerce.services.ProductService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/products")
 public class ProductController {
@@ -37,13 +39,13 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDTO> insert (@RequestBody ProductDTO productDTO){
+    public ResponseEntity<ProductDTO> insert (@RequestBody @Valid ProductDTO productDTO){
         ProductDTO dto = productService.insert(productDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDTO> findById(@PathVariable Long id, @RequestBody ProductDTO productDTO){
+    public ResponseEntity<ProductDTO> findById(@PathVariable Long id, @RequestBody @Valid ProductDTO productDTO){
         ProductDTO dto = productService.update(id, productDTO);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
