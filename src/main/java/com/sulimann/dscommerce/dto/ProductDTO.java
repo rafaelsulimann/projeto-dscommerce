@@ -2,11 +2,12 @@ package com.sulimann.dscommerce.dto;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
+
 import com.sulimann.dscommerce.entities.Product;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -2,6 +2,8 @@ package com.sulimann.dscommerce.controllers.handlers;
 
 import java.time.LocalDateTime;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -14,8 +16,6 @@ import com.sulimann.dscommerce.dto.FieldMessageDTO;
 import com.sulimann.dscommerce.dto.ValidationErrorDTO;
 import com.sulimann.dscommerce.services.exceptions.DatabaseException;
 import com.sulimann.dscommerce.services.exceptions.ResourceNotFoundException;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {

@@ -1,5 +1,7 @@
 package com.sulimann.dscommerce.services;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -15,8 +17,6 @@ import com.sulimann.dscommerce.repositories.ProductRepository;
 import com.sulimann.dscommerce.services.exceptions.DatabaseException;
 import com.sulimann.dscommerce.services.exceptions.ResourceNotFoundException;
 
-import jakarta.persistence.EntityNotFoundException;
-
 @Service
 public class ProductService {
 
@@ -30,8 +30,8 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public Page<ProductDTO> findAll(Pageable pageable){
-        Page<Product> result = productRepository.findAll(pageable);
+    public Page<ProductDTO> findAll(String name, Pageable pageable){
+        Page<Product> result = productRepository.searchByName(name, pageable);
         return result.map(x -> new ProductDTO(x));
     }
 
