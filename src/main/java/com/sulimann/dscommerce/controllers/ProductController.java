@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sulimann.dscommerce.dto.ProductDTO;
+import com.sulimann.dscommerce.dto.ProductMinDTO;
 import com.sulimann.dscommerce.services.ProductService;
 
 @RestController
@@ -35,8 +36,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProductDTO>> findAll(@RequestParam(name = "name", defaultValue = "") String name, Pageable pageable){
-        Page<ProductDTO> dto = productService.findAll(name, pageable);
+    public ResponseEntity<Page<ProductMinDTO>> findAll(@RequestParam(name = "name", defaultValue = "") String name, Pageable pageable){
+        Page<ProductMinDTO> dto = productService.findAll(name, pageable);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
     
