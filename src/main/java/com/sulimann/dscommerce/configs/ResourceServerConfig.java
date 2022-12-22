@@ -36,14 +36,14 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-		resources.tokenStore(tokenStore);
+		resources.tokenStore(this.tokenStore);
 	}
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 
 		// H2
-		if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
+		if (Arrays.asList(this.env.getActiveProfiles()).contains("test")) {
 			http.headers().frameOptions().disable();
 		}
 
@@ -55,7 +55,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 
-		String[] origins = corsOrigins.split(",");
+		String[] origins = this.corsOrigins.split(",");
 
 	    CorsConfiguration corsConfig = new CorsConfiguration();
 	    corsConfig.setAllowedOriginPatterns(Arrays.asList(origins));

@@ -25,7 +25,7 @@ public class WebSecurityConfig {
 	@Bean
 	JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
-		tokenConverter.setSigningKey(jwtSecret);
+		tokenConverter.setSigningKey(this.jwtSecret);
 		return tokenConverter;
 	}
 

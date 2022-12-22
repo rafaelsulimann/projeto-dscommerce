@@ -31,34 +31,34 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> findById(@PathVariable Long id){
-        ProductDTO dto = productService.findById(id);
+        ProductDTO dto = this.productService.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
     @GetMapping
     public ResponseEntity<Page<ProductMinDTO>> findAll(@RequestParam(name = "name", defaultValue = "") String name, Pageable pageable){
-        Page<ProductMinDTO> dto = productService.findAll(name, pageable);
+        Page<ProductMinDTO> dto = this.productService.findAll(name, pageable);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
     
     @PostMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<ProductDTO> insert (@RequestBody @Valid ProductDTO productDTO){
-        ProductDTO dto = productService.insert(productDTO);
+        ProductDTO dto = this.productService.insert(productDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody @Valid ProductDTO productDTO){
-        ProductDTO dto = productService.update(id, productDTO);
+        ProductDTO dto = this.productService.update(id, productDTO);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
     
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable Long id){
-        productService.delete(id);
+        this.productService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

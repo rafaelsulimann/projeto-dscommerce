@@ -1,11 +1,16 @@
 package com.sulimann.dscommerce.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
+import com.sulimann.dscommerce.entities.Category;
 import com.sulimann.dscommerce.entities.Product;
 
 import lombok.AllArgsConstructor;
@@ -15,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ProductDTO {
+public class ProductDTO implements Serializable{
     
     private Long id;
 
@@ -30,6 +35,27 @@ public class ProductDTO {
     @Positive
     private BigDecimal price;
     private String imgUrl;
+
+    @NotEmpty(message = "Pelo menos uma categoria deve ser informada")
+    private List<CategoryDTO> categories = new ArrayList<>();
+
+    public ProductDTO(Product entity, List<Category> categoriesList) {
+        id = entity.getId();
+        name = entity.getName();
+        description = entity.getDescription();
+        price = entity.getPrice();
+        imgUrl = entity.getImgUrl();
+        categoriesList.stream().forEach(x -> categories.add(new CategoryDTO(x)));
+    }
+
+    public ProductDTO(List<CategoryDTO> categoriesList, Product entity) {
+        id = entity.getId();
+        name = entity.getName();
+        description = entity.getDescription();
+        price = entity.getPrice();
+        imgUrl = entity.getImgUrl();
+        categories = categoriesList;
+    }  
 
     public ProductDTO(Product entity) {
         id = entity.getId();

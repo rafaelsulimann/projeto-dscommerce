@@ -46,18 +46,18 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-		.withClient(clientId)
-		.secret(passwordEncoder.encode(clientSecret))
+		.withClient(this.clientId)
+		.secret(this.passwordEncoder.encode(this.clientSecret))
 		.scopes("read", "write")
 		.authorizedGrantTypes("password")
-		.accessTokenValiditySeconds(jwtDuration);
+		.accessTokenValiditySeconds(this.jwtDuration);
 	}
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 
-		endpoints.authenticationManager(authenticationManager)
-		.tokenStore(tokenStore)
-		.accessTokenConverter(accessTokenConverter);
+		endpoints.authenticationManager(this.authenticationManager)
+		.tokenStore(this.tokenStore)
+		.accessTokenConverter(this.accessTokenConverter);
 	}
 }

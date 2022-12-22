@@ -19,7 +19,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User userDetails = userRepository.findByEmail(username);
+        User userDetails = this.userRepository.findByEmail(username);
         if(userDetails == null){
             throw new UsernameNotFoundException("Email not found");
         }
@@ -29,7 +29,7 @@ public class UserService implements UserDetailsService {
     protected User authenticated(){
         try {
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
-            return userRepository.findByEmail(username);
+            return this.userRepository.findByEmail(username);
 
         } catch (Exception e) {
             throw new UsernameNotFoundException("Invalid username");
@@ -37,7 +37,7 @@ public class UserService implements UserDetailsService {
     }
 
     public UserDTO getMe(){
-        User user = authenticated();
+        User user = this.authenticated();
         return new UserDTO(user);
     }
     
