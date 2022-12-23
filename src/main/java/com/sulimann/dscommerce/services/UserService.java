@@ -30,7 +30,6 @@ public class UserService implements UserDetailsService {
         try {
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
             return this.userRepository.findByEmail(username);
-
         } catch (Exception e) {
             throw new UsernameNotFoundException("Invalid username");
         }

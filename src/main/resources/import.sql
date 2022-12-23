@@ -65,9 +65,9 @@ INSERT INTO tb_users_roles (user_id, role_id) VALUES (1, 1);
 INSERT INTO tb_users_roles (user_id, role_id) VALUES (2, 1);
 INSERT INTO tb_users_roles (user_id, role_id) VALUES (2, 2);
 
-INSERT INTO tb_orders (moment, status, client_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 1, 1);
-INSERT INTO tb_orders (moment, status, client_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-07-29T15:50:00Z', 3, 2);
-INSERT INTO tb_orders (moment, status, client_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-08-03T14:20:00Z', 0, 1);
+INSERT INTO tb_orders (moment, status, client_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 'PAID', 1);
+INSERT INTO tb_orders (moment, status, client_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-07-29T15:50:00Z', 'DELIVERED', 2);
+INSERT INTO tb_orders (moment, status, client_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-08-03T14:20:00Z', 'WAITING_PAYMENT', 1);
 
 INSERT INTO tb_order_items (order_id, product_id, quantity, price) VALUES (1, 1, 2, 90.5);
 INSERT INTO tb_order_items (order_id, product_id, quantity, price) VALUES (1, 3, 1, 1250.0);
