@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sulimann.dscommerce.entities.Order;
+import com.sulimann.dscommerce.entities.OrderItem;
 import com.sulimann.dscommerce.projections.OrderDTOProjection;
 import com.sulimann.dscommerce.projections.OrderItemDTOProjection;
 
@@ -31,8 +33,18 @@ public class OrderDTO {
         moment = projection.getOrderMoment();
         status = projection.getStatus();
         client = new ClientDTO(projection.getUserId(), projection.getName());
-        payment = new PaymentDTO(projection.getPaymentId(), projection.getPaymentMoment());
+        payment = projection.getPaymentId() == null && projection.getPaymentMoment() == null ? null : new PaymentDTO(projection.getPaymentId(), projection.getPaymentMoment());
         orderItemProjection.stream().forEach(x -> items.add(new OrderItemDTO(x.getId(), x.getName(), x.getPrice(), x.getQuantity(), x.getSubTotal())));
+    }
+
+    public OrderDTO(Order order, List<OrderItem> orderItems){
+        id = order.getId();
+        moment = order.getMoment();
+        status = order.getStatus().name();
+        client = new ClientDTO(order.getClient());
+        for(OrderItem item : orderItems){
+            items.add(new OrderItemDTO(item));
+        }
     }
 
     public BigDecimal getTotal(){

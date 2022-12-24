@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class OrderItem {
     
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
 
     @Column(nullable = false)
     private Integer quantity;
