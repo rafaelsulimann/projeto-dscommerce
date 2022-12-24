@@ -17,6 +17,7 @@ public class OrderItemDTO {
     private String name;
     private BigDecimal price;
     private Integer quantity;
+    private String imgUrl;
     private BigDecimal subTotal;
 
     public OrderItemDTO(OrderItem entity){
@@ -24,6 +25,7 @@ public class OrderItemDTO {
         name = entity.getProduct().getName();
         price = entity.getPrice();
         quantity = entity.getQuantity();
+        imgUrl = entity.getProduct().getImgUrl();
         subTotal = entity.getPrice().multiply(new BigDecimal(entity.getQuantity()));
     }
 

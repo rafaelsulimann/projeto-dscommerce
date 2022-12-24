@@ -34,7 +34,7 @@ public class OrderDTO {
         status = projection.getStatus();
         client = new ClientDTO(projection.getUserId(), projection.getName());
         payment = projection.getPaymentId() == null && projection.getPaymentMoment() == null ? null : new PaymentDTO(projection.getPaymentId(), projection.getPaymentMoment());
-        orderItemProjection.stream().forEach(x -> items.add(new OrderItemDTO(x.getId(), x.getName(), x.getPrice(), x.getQuantity(), x.getSubTotal())));
+        orderItemProjection.stream().forEach(x -> items.add(new OrderItemDTO(x.getId(), x.getName(), x.getPrice(), x.getQuantity(), x.getImgUrl(), x.getSubTotal())));
     }
 
     public OrderDTO(Order order, List<OrderItem> orderItems){

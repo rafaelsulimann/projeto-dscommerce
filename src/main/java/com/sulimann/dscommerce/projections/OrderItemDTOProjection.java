@@ -8,5 +8,6 @@ public interface OrderItemDTOProjection {
     String getName();
     BigDecimal getPrice();
     Integer getQuantity();
+    String getImgUrl();
     BigDecimal getSubTotal();
 }
