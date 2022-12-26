@@ -12,9 +12,8 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     
     @Query(nativeQuery = true, value = "SELECT tb_categories.id, tb_categories.name "
     + "FROM tb_product_category "
-    + "INNER JOIN tb_products ON tb_product_category.product_id = tb_products.id "
     + "INNER JOIN tb_categories ON tb_product_category.category_id = tb_categories.id "
-    + "WHERE tb_products.id = :productId")
+    + "WHERE tb_product_category.product_id = :productId")
     List<Category> findAllCategoriesByProduct(@Param("productId")Long productId);
     
 }

@@ -16,5 +16,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     + "INNER JOIN tb_users ON tb_users.id = tb_orders.client_id "
     + "LEFT JOIN tb_payments ON tb_payments.order_id = tb_orders.id "
     + "WHERE tb_orders.id = :orderId")
-    Optional<OrderDTOProjection> findOrderById(@Param("orderId")Long orderId);
+    Optional<OrderDTOProjection> findOrderById(@Param("orderId") Long orderId);
 }

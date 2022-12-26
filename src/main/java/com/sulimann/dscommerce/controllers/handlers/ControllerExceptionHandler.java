@@ -15,6 +15,7 @@ import com.sulimann.dscommerce.dto.CustomErrorDTO;
 import com.sulimann.dscommerce.dto.FieldMessageDTO;
 import com.sulimann.dscommerce.dto.ValidationErrorDTO;
 import com.sulimann.dscommerce.services.exceptions.DatabaseException;
+import com.sulimann.dscommerce.services.exceptions.ForbiddenException;
 import com.sulimann.dscommerce.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
@@ -41,6 +42,13 @@ public class ControllerExceptionHandler {
         for(FieldError f : e.getBindingResult().getFieldErrors()){
             error.addError(new FieldMessageDTO(f.getField(), f.getDefaultMessage()));
         }
+        return ResponseEntity.status(status).body(error);
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<CustomErrorDTO> forbiddenException(ForbiddenException e, HttpServletRequest request){
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        CustomErrorDTO error = new CustomErrorDTO(LocalDateTime.now(), status.value(), e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(error);
     }
     

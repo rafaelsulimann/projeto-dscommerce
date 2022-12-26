@@ -35,10 +35,14 @@ public class OrderService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private AuthService authService;
+
     @Transactional(readOnly = true)
     public OrderDTO findOrderById(Long orderId){
         OrderDTOProjection order = this.orderRepository.findOrderById(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Pedido inexistente. id: " + orderId));
+        authService.validatedSelfOrAdmin(order.getOrderId());
         return new OrderDTO(order, this.orderItemRepository.findAllOrderItemsIntoOrder(orderId));
     }
 
