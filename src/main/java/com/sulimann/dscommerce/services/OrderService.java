@@ -42,7 +42,7 @@ public class OrderService {
     public OrderDTO findOrderById(Long orderId){
         OrderDTOProjection order = this.orderRepository.findOrderById(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Pedido inexistente. id: " + orderId));
-        authService.validatedSelfOrAdmin(order.getOrderId());
+        authService.validatedSelfOrAdmin(order.getUserId());
         return new OrderDTO(order, this.orderItemRepository.findAllOrderItemsIntoOrder(orderId));
     }
 

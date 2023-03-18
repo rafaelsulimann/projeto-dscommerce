@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sulimann.dscommerce.entities.Order;
 import com.sulimann.dscommerce.entities.OrderItem;
@@ -26,6 +28,8 @@ public class OrderDTO {
     private String status;
     private ClientDTO client;
     private PaymentDTO payment;
+
+    @NotEmpty(message = "Pelo menos um item deve ser informado")
     private List<OrderItemDTO> items = new ArrayList<>();
 
     public OrderDTO(OrderDTOProjection projection, List<OrderItemDTOProjection> orderItemProjection){
